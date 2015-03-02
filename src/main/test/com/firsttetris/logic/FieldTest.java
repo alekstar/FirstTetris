@@ -26,5 +26,12 @@ public class FieldTest {
         field = Field.create(0, 4);
         fail("Exception was not thrown.");
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionForWidthMinus10() {
+        Field field = null;
+        field = Field.create(-10, 4);
+        fail("Exception was not thrown.");
+    }
 
 }
