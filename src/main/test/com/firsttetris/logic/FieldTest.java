@@ -58,5 +58,25 @@ public class FieldTest {
             }
         }
     }
+    
+    @Test
+    public void shouldSetCellToTrueAtCoordinates3And4() {
+        Field field = Field.create(5, 10);
+        field.setCellValue(3, 4, true);
+        assertEquals(true, field.getCellValue(3, 4));
+    }
+    
+    @Test
+    public void shouldBeTrueOnlyCellAtCoordinates3And4OtherAreClear() {
+        Field field = Field.create(5, 10);
+        field.setCellValue(3, 4, true);
+        for (int xIndex = 0; xIndex < 5; xIndex++) {
+            for (int yIndex = 0; yIndex < 10; yIndex++) {
+                if(!(xIndex == 3 && yIndex == 4)) {
+                    assertEquals(false, field.getCellValue(xIndex, yIndex));
+                }
+            }
+        }
+    }
 
 }
