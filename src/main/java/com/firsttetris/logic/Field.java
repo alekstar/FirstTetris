@@ -14,6 +14,11 @@ public class Field {
         setHeight(height);
         setField(new ArrayList<Boolean>(calculateFieldArraySize()));
     }
+    
+    public static Field create(int width, int height) {
+        Field field = new Field(width, height);
+        return field;
+    }
 
     private int calculateFieldArraySize() {
         return getWidth() * getHeight();
