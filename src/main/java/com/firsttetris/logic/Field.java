@@ -1,28 +1,30 @@
 package com.firsttetris.logic;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import com.firsttetris.exception.ArgumentIsNullException;
 
 public class Field {
     private int width;
     private int height;
-    private ArrayList<Boolean> field;
-    
+    private List<Boolean> field;
+
     private Field(int width, int height) {
         setWidth(width);
         setHeight(height);
-        setField(new ArrayList<Boolean>());
+        setField(Collections.synchronizedList(new ArrayList<Boolean>()));
         fillFieldArrayWithFalseValues();
     }
-    
+
     public static Field create(int width, int height) {
         Field field = new Field(width, height);
         return field;
     }
-    
+
     private void fillFieldArrayWithFalseValues() {
-        for(int index = 0; index < calculateFieldArraySize(); index++) {
+        for (int index = 0; index < calculateFieldArraySize(); index++) {
             field.add(new Boolean(false));
         }
     }
@@ -36,7 +38,7 @@ public class Field {
     }
 
     private void setWidth(int width) {
-        if(width <= 0) {
+        if (width <= 0) {
             throw new IllegalArgumentException("width: " + width);
         }
         this.width = width;
@@ -47,24 +49,24 @@ public class Field {
     }
 
     private void setHeight(int height) {
-        if(height <= 0) {
+        if (height <= 0) {
             throw new IllegalArgumentException("height: " + height);
         }
         this.height = height;
     }
 
-    private ArrayList<Boolean> getField() {
+    private List<Boolean> getField() {
         return field;
     }
 
-    private void setField(ArrayList<Boolean> field) {
-        if(field == null) {
+    private void setField(List<Boolean> field) {
+        if (field == null) {
             throw new ArgumentIsNullException("field");
         }
         this.field = field;
     }
-    
-    public boolean getCellValue(int xIndex, int yIndex) {
+
+    public synchronized boolean getCellValue(int xIndex, int yIndex) {
         checkXIndex(xIndex);
         checkYIndex(yIndex);
         int arrayIndex = calculateArrayIndex(xIndex, yIndex);
@@ -72,13 +74,13 @@ public class Field {
     }
 
     private void checkYIndex(int yIndex) {
-        if((yIndex >= getHeight()) || (yIndex < 0)) {
+        if ((yIndex >= getHeight()) || (yIndex < 0)) {
             throw new IllegalArgumentException("yIndex: " + yIndex);
         }
     }
 
     private void checkXIndex(int xIndex) {
-        if((xIndex >= getWidth()) || (xIndex < 0)) {
+        if ((xIndex >= getWidth()) || (xIndex < 0)) {
             throw new IllegalArgumentException("xIndex: " + xIndex);
         }
     }
@@ -86,12 +88,17 @@ public class Field {
     private int calculateArrayIndex(int xIndex, int yIndex) {
         return getWidth() * yIndex + xIndex;
     }
-    
-    public void setCellValue(int xIndex, int yIndex, boolean value) {
+
+    public synchronized void setCellValue(int xIndex, int yIndex, boolean value) {
         checkXIndex(xIndex);
         checkYIndex(yIndex);
         int arrayIndex = calculateArrayIndex(xIndex, yIndex);
         getField().set(arrayIndex, value);
     }
-    
+
+    public synchronized void clearLine(int yIndex) {
+        for (int xIndex = 0; xIndex < getWidth(); xIndex++) {
+            setCellValue(xIndex, yIndex, false);
+        }
+    }
 }
