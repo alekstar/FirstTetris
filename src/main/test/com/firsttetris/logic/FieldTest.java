@@ -19,5 +19,12 @@ public class FieldTest {
         field = Field.create(3, 4);
         assertEquals(4, field.getHeight());
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionForWidth0() {
+        Field field = null;
+        field = Field.create(0, 4);
+        fail("Exception was not thrown.");
+    }
 
 }
