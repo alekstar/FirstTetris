@@ -87,7 +87,7 @@ public class Field {
         return getWidth() * yIndex + xIndex;
     }
     
-    private void setCellValue(int xIndex, int yIndex, boolean value) {
+    public void setCellValue(int xIndex, int yIndex, boolean value) {
         checkXIndex(xIndex);
         checkYIndex(yIndex);
         int arrayIndex = calculateArrayIndex(xIndex, yIndex);
