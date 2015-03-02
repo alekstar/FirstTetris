@@ -47,5 +47,16 @@ public class FieldTest {
         field = Field.create(4, -10);
         fail("Exception was not thrown.");
     }
+    
+    @Test
+    public void shouldCreateEmptyField() {
+        Field field = null;
+        field = Field.create(10, 20);
+        for (int xIndex = 0; xIndex < 10; xIndex++) {
+            for (int yIndex = 0; yIndex < 20; yIndex++) {
+                assertEquals(false, field.getCellValue(xIndex, yIndex));
+            }
+        }
+    }
 
 }

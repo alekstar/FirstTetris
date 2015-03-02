@@ -12,12 +12,19 @@ public class Field {
     private Field(int width, int height) {
         setWidth(width);
         setHeight(height);
-        setField(new ArrayList<Boolean>(calculateFieldArraySize()));
+        setField(new ArrayList<Boolean>());
+        fillFieldArrayWithFalseValues();
     }
     
     public static Field create(int width, int height) {
         Field field = new Field(width, height);
         return field;
+    }
+    
+    private void fillFieldArrayWithFalseValues() {
+        for(int index = 0; index < calculateFieldArraySize(); index++) {
+            field.add(new Boolean(false));
+        }
     }
 
     private int calculateFieldArraySize() {
@@ -86,4 +93,5 @@ public class Field {
         int arrayIndex = calculateArrayIndex(xIndex, yIndex);
         getField().set(arrayIndex, value);
     }
+    
 }
