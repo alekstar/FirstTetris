@@ -33,5 +33,19 @@ public class FieldTest {
         field = Field.create(-10, 4);
         fail("Exception was not thrown.");
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionForHeight0() {
+        Field field = null;
+        field = Field.create(4, 0);
+        fail("Exception was not thrown.");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionForHeightMinus10() {
+        Field field = null;
+        field = Field.create(4, -10);
+        fail("Exception was not thrown.");
+    }
 
 }
