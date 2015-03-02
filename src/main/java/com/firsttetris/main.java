@@ -4,7 +4,7 @@ import com.firsttetris.debug.FieldPrinter;
 import com.firsttetris.logic.Field;
 import com.firsttetris.logic.FullLineRemover;
 
-public class main {
+public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         Field field = Field.create(10, 20);
