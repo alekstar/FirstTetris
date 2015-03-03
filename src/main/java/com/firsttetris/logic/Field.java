@@ -72,6 +72,19 @@ public class Field {
         int arrayIndex = calculateArrayIndex(xIndex, yIndex);
         return getField().get(arrayIndex).booleanValue();
     }
+    
+    public synchronized boolean getCellValue(TetrisCoordinates coordinates) {
+        checkCoordinates(coordinates);
+        return getCellValue(coordinates.getX(), coordinates.getY());
+    }
+    
+    private void checkCoordinates(TetrisCoordinates coordinates) {
+        if(coordinates == null) {
+            throw new ArgumentIsNullException("coordinates");
+        }
+        checkXIndex(coordinates.getX());
+        checkYIndex(coordinates.getY());
+    }
 
     private void checkYIndex(int yIndex) {
         if ((yIndex >= getHeight()) || (yIndex < 0)) {
@@ -94,6 +107,11 @@ public class Field {
         checkYIndex(yIndex);
         int arrayIndex = calculateArrayIndex(xIndex, yIndex);
         getField().set(arrayIndex, value);
+    }
+    
+    public synchronized void setCellValue(TetrisCoordinates coordinates, boolean value) {
+        checkCoordinates(coordinates);
+        setCellValue(coordinates.getX(), coordinates.getY(), value);
     }
 
     public synchronized void clearLine(int yIndex) {
