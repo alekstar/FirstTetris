@@ -19,6 +19,7 @@ public class FigureOnField {
         setFigure(figure);
         setCoordinatesOfFirstFiguresCell(coordinatesOfFirstFiguresCell);
         setField(field);
+        setAngle(angle);
     }
 
     public static FigureOnField create(Figure figure,
@@ -71,16 +72,17 @@ public class FigureOnField {
     }
 
     protected List<TetrisCoordinates> calculateCurrentCellsCoordinates() {
-        List<TetrisCoordinates> cellsCoordinates = figure.getCellsCoordinates();
+        List<TetrisCoordinates> cellsCoordinates =
+                getFigure().getCellsCoordinates(getAngle());
         List<TetrisCoordinates> currentCellsCoordinates =
                 new ArrayList<TetrisCoordinates>();
         for (TetrisCoordinates currentCoordinates : cellsCoordinates) {
             int newX =
                     currentCoordinates.getX()
-                            + coordinatesOfFirstFiguresCell.getX();
+                            + getCoordinatesOfFirstFiguresCell().getX();
             int newY =
                     currentCoordinates.getY()
-                            + coordinatesOfFirstFiguresCell.getY();
+                            + getCoordinatesOfFirstFiguresCell().getY();
             currentCoordinates = TetrisCoordinates.create(newX, newY);
             currentCellsCoordinates.add(currentCoordinates);
         }
