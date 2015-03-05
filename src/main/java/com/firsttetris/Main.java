@@ -8,6 +8,8 @@ import com.firsttetris.logic.Field;
 import com.firsttetris.logic.FullLineRemover;
 import com.firsttetris.logic.TetrisCoordinates;
 import com.firsttetris.logic.figures.Figure;
+import com.firsttetris.logic.figures.FigureAngle;
+import com.firsttetris.logic.figures.FigureAngle.AngleValue;
 import com.firsttetris.logic.figures.FigureI;
 import com.firsttetris.logic.figures.FigureOnField;
 
@@ -23,11 +25,20 @@ public class Main {
         // }
         fieldPrinter.print();
         Figure figure = FigureI.create();
+        int y = 3;
         FigureOnField figureOnField =
-                FigureOnField.create(figure, TetrisCoordinates.create(2, 3),
-                        field);
-        figureOnField.place();
-        fieldPrinter.print();
+                FigureOnField.create(figure, TetrisCoordinates.create(2, y),
+                        field, FigureAngle.create(AngleValue.ZERO));
+        while(figureOnField.canBePlaced()) {
+            figureOnField.place();
+            fieldPrinter.print();
+            y++;
+            FigureOnField newFigureOnField =
+                    FigureOnField.move(figureOnField,
+                            TetrisCoordinates.create(2, y),
+                            FigureAngle.create(AngleValue.ZERO));
+            figureOnField.remove();
+            figureOnField = newFigureOnField;
+        }
     }
-
 }

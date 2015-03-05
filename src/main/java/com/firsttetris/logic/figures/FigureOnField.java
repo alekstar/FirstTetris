@@ -3,24 +3,46 @@ package com.firsttetris.logic.figures;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.firsttetris.exception.ArgumentIsNullException;
 import com.firsttetris.logic.Field;
 import com.firsttetris.logic.TetrisCoordinates;
 
 public class FigureOnField {
-    Figure figure;
-    TetrisCoordinates coordinatesOfFirstFiguresCell;
-    Field field;
+    private Figure figure;
+    private TetrisCoordinates coordinatesOfFirstFiguresCell;
+    private Field field;
+    private FigureAngle angle;
 
     protected FigureOnField(Figure figure,
-            TetrisCoordinates coordinatesOfFirstFiguresCell, Field field) {
+            TetrisCoordinates coordinatesOfFirstFiguresCell, Field field,
+            FigureAngle angle) {
         setFigure(figure);
         setCoordinatesOfFirstFiguresCell(coordinatesOfFirstFiguresCell);
         setField(field);
     }
 
     public static FigureOnField create(Figure figure,
-            TetrisCoordinates coordinatesOfFirstFiguresCell, Field field) {
-        return new FigureOnField(figure, coordinatesOfFirstFiguresCell, field);
+            TetrisCoordinates coordinatesOfFirstFiguresCell, Field field,
+            FigureAngle angle) {
+        return new FigureOnField(figure, coordinatesOfFirstFiguresCell, field,
+                angle);
+    }
+
+    public static FigureOnField move(FigureOnField figureOnField,
+            TetrisCoordinates coordinatesOfFirstFiguresCell, FigureAngle angle) {
+        return new FigureOnField(figureOnField.getFigure(),
+                coordinatesOfFirstFiguresCell, figureOnField.getField(), angle);
+    }
+
+    protected FigureAngle getAngle() {
+        return angle;
+    }
+
+    protected void setAngle(FigureAngle angle) {
+        if (angle == null) {
+            throw new ArgumentIsNullException("angle");
+        }
+        this.angle = angle;
     }
 
     protected Figure getFigure() {
@@ -100,7 +122,10 @@ public class FigureOnField {
     }
 
     public boolean canBePlaced() {
-        if (doesFigureIntersectWithFilledCells() || doesFigureFitOutField()) {
+        if (doesFigureFitOutField()) {
+            return false;
+        }
+        if (doesFigureIntersectWithFilledCells()) {
             return false;
         }
         return true;
@@ -113,6 +138,12 @@ public class FigureOnField {
             }
         } else {
             throw new FigureCantBePlacedException();
+        }
+    }
+
+    public void remove() {
+        for (TetrisCoordinates currentCoordinates : calculateCurrentCellsCoordinates()) {
+            getField().setCellValue(currentCoordinates, false);
         }
     }
 }
