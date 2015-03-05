@@ -17,7 +17,7 @@ public class FigureOnField {
         setCoordinatesOfFirstFiguresCell(coordinatesOfFirstFiguresCell);
         setField(field);
     }
-    
+
     public static FigureOnField create(Figure figure,
             TetrisCoordinates coordinatesOfFirstFiguresCell, Field field) {
         return new FigureOnField(figure, coordinatesOfFirstFiguresCell, field);
@@ -48,7 +48,6 @@ public class FigureOnField {
         this.field = field;
     }
 
-
     protected List<TetrisCoordinates> calculateCurrentCellsCoordinates() {
         List<TetrisCoordinates> cellsCoordinates = figure.getCellsCoordinates();
         List<TetrisCoordinates> currentCellsCoordinates =
@@ -66,7 +65,7 @@ public class FigureOnField {
         return currentCellsCoordinates;
     }
 
-    protected boolean doesFigureIntersectWithFilledCells() {
+    public boolean doesFigureIntersectWithFilledCells() {
         List<TetrisCoordinates> currentCellsCoordinates =
                 calculateCurrentCellsCoordinates();
         for (TetrisCoordinates currentCoordinates : currentCellsCoordinates) {
@@ -80,16 +79,16 @@ public class FigureOnField {
     protected boolean doesCellOutOfField(TetrisCoordinates coordinates) {
         if (coordinates.getX() < 0
                 || getField().getWidth() <= coordinates.getX()) {
-            return false;
+            return true;
         }
         if (coordinates.getY() < 0
                 || getField().getHeight() <= coordinates.getY()) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    protected boolean doesFigureFitOutField() {
+    public boolean doesFigureFitOutField() {
         List<TetrisCoordinates> currentCellsCoordinates =
                 calculateCurrentCellsCoordinates();
         for (TetrisCoordinates currentCoordinates : currentCellsCoordinates) {
@@ -100,10 +99,20 @@ public class FigureOnField {
         return false;
     }
 
-    protected boolean canBePlaced() {
+    public boolean canBePlaced() {
         if (doesFigureIntersectWithFilledCells() || doesFigureFitOutField()) {
             return false;
         }
         return true;
+    }
+
+    public void place() {
+        if (canBePlaced()) {
+            for (TetrisCoordinates currentCoordinates : calculateCurrentCellsCoordinates()) {
+                getField().setCellValue(currentCoordinates, true);
+            }
+        } else {
+            throw new FigureCantBePlacedException();
+        }
     }
 }
