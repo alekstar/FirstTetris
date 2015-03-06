@@ -35,4 +35,35 @@ public class TetrisCoordinates {
         }
         this.y = y;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + x;
+        result = prime * result + y;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object anotherObject) {
+        if (this == anotherObject)
+            return true;
+        if (anotherObject == null)
+            return false;
+        if (getClass() != anotherObject.getClass())
+            return false;
+        if (hashCode() != anotherObject.hashCode()) {
+            return false;
+        }
+        TetrisCoordinates anotherCoordinates = 
+                (TetrisCoordinates) anotherObject;
+        if (x != anotherCoordinates.x)
+            return false;
+        if (y != anotherCoordinates.y)
+            return false;
+        return true;
+    }
+    
+    
 }
