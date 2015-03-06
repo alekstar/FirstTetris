@@ -33,4 +33,10 @@ public class TetrisCoordinatesTest {
         coordinates = TetrisCoordinates.create(5, 0);
         assertEquals(0, coordinates.getY());
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionForXEqualsMinus1() {
+        TetrisCoordinates coordinates = null;
+        coordinates = TetrisCoordinates.create(-1, 5);
+    }
 }
