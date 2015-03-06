@@ -26,4 +26,11 @@ public class TetrisCoordinatesTest {
         coordinates = TetrisCoordinates.create(0, 15);
         assertEquals(0, coordinates.getX());
     }
+    
+    @Test
+    public void shouldCreateCoordinatesWithYEquals0() {
+        TetrisCoordinates coordinates = null;
+        coordinates = TetrisCoordinates.create(5, 0);
+        assertEquals(0, coordinates.getY());
+    }
 }
