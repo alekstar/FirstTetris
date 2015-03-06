@@ -20,4 +20,10 @@ public class TetrisCoordinatesTest {
         assertEquals(15, coordinates.getY());
     }
 
+    @Test
+    public void shouldCreateCoordinatesWithXEquals0() {
+        TetrisCoordinates coordinates = null;
+        coordinates = TetrisCoordinates.create(0, 15);
+        assertEquals(0, coordinates.getX());
+    }
 }
