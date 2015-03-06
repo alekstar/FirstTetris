@@ -14,7 +14,7 @@ public class TetrisCoordinatesTest {
     }
     
     @Test
-    public void shouldCreateCoordinatesWithXEquals15() {
+    public void shouldCreateCoordinatesWithYEquals15() {
         TetrisCoordinates coordinates = null;
         coordinates = TetrisCoordinates.create(12, 15);
         assertEquals(15, coordinates.getY());
