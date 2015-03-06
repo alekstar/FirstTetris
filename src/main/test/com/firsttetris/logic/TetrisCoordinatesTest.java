@@ -36,18 +36,21 @@ public class TetrisCoordinatesTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowIllegalArgumentExceptionForXEqualsMinus1() {
+        @SuppressWarnings("unused")
         TetrisCoordinates coordinates = null;
         coordinates = TetrisCoordinates.create(-1, 5);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowIllegalArgumentExceptionForYEqualsMinus5() {
+        @SuppressWarnings("unused")
         TetrisCoordinates coordinates = null;
         coordinates = TetrisCoordinates.create(1, -5);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowIllegalArgumentExceptionForXEqualsMinus1AndYEqualsMinus5() {
+        @SuppressWarnings("unused")
         TetrisCoordinates coordinates = null;
         coordinates = TetrisCoordinates.create(-1, -5);
     }
