@@ -22,6 +22,7 @@ public class FieldTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowIllegalArgumentExceptionForWidth0() {
+        @SuppressWarnings("unused")
         Field field = null;
         field = Field.create(0, 4);
         fail("Exception was not thrown.");
@@ -29,6 +30,7 @@ public class FieldTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowIllegalArgumentExceptionForWidthMinus10() {
+        @SuppressWarnings("unused")
         Field field = null;
         field = Field.create(-10, 4);
         fail("Exception was not thrown.");
@@ -36,6 +38,7 @@ public class FieldTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowIllegalArgumentExceptionForHeight0() {
+        @SuppressWarnings("unused")
         Field field = null;
         field = Field.create(4, 0);
         fail("Exception was not thrown.");
@@ -43,6 +46,7 @@ public class FieldTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowIllegalArgumentExceptionForHeightMinus10() {
+        @SuppressWarnings("unused")
         Field field = null;
         field = Field.create(4, -10);
         fail("Exception was not thrown.");
