@@ -45,4 +45,10 @@ public class TetrisCoordinatesTest {
         TetrisCoordinates coordinates = null;
         coordinates = TetrisCoordinates.create(1, -5);
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionForXEqualsMinus1AndYEqualsMinus5() {
+        TetrisCoordinates coordinates = null;
+        coordinates = TetrisCoordinates.create(-1, -5);
+    }
 }
