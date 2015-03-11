@@ -13,7 +13,7 @@ import com.firsttetris.logic.TetrisCoordinatesTest;
 public class FigureITest {
 
     @Test
-    public void shouldReturnCoordinatesOfFigureIVertically() {
+    public void shouldReturnCoordinatesOfFigureIVerticallyForZeroDegreesAngle() {
         Figure figure = FigureI.create();
         List<TetrisCoordinates> actualCoordinates =
                 figure.getCellsCoordinates(FigureAngle
