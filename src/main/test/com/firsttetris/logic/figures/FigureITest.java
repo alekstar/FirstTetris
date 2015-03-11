@@ -27,7 +27,7 @@ public class FigureITest {
     }
     
     @Test
-    public void shouldReturnCoordinatesOfFigureIHorizontally() {
+    public void shouldReturnCoordinatesOfFigureIHorizontallyForNinetyDegreesAngle() {
         Figure figure = FigureI.create();
         List<TetrisCoordinates> actualCoordinates =
                 figure.getCellsCoordinates(FigureAngle
