@@ -25,4 +25,18 @@ public class FigureITest {
         expectedCoordinates.add(TetrisCoordinates.create(0, 3));
         assertArrayEquals(expectedCoordinates.toArray(), actualCoordinates.toArray());
     }
+    
+    @Test
+    public void shouldReturnCoordinatesOfFigureIHorizontally() {
+        Figure figure = FigureI.create();
+        List<TetrisCoordinates> actualCoordinates =
+                figure.getCellsCoordinates(FigureAngle
+                        .create(FigureAngle.AngleValue.NINETY));
+        List<TetrisCoordinates> expectedCoordinates = new LinkedList<TetrisCoordinates>();
+        expectedCoordinates.add(TetrisCoordinates.create(0, 0));
+        expectedCoordinates.add(TetrisCoordinates.create(1, 0));
+        expectedCoordinates.add(TetrisCoordinates.create(2, 0));
+        expectedCoordinates.add(TetrisCoordinates.create(3, 0));
+        assertArrayEquals(expectedCoordinates.toArray(), actualCoordinates.toArray());
+    }
 }
