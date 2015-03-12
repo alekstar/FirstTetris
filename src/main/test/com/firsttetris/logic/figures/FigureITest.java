@@ -21,6 +21,17 @@ public class FigureITest {
                 .toArray(), actualCoordinates.toArray());
     }
 
+    @Test
+    public void
+            shouldReturnCoordinatesOfFigureIVerticallyForOneHundredAndEightyDegreesAngle() {
+        Figure figure = FigureI.create();
+        List<TetrisCoordinates> actualCoordinates = figure
+                .getCellsCoordinates(FigureAngle
+                        .create(FigureAngle.AngleValue.ONE_HUNDRED_EIGHTY));
+        assertArrayEquals(defineExpectedListOfCoordinatesForVerticalFigureI()
+                .toArray(), actualCoordinates.toArray());
+    }
+
     private List<TetrisCoordinates>
             defineExpectedListOfCoordinatesForVerticalFigureI() {
         List<TetrisCoordinates> expectedCoordinates = new LinkedList<TetrisCoordinates>();
