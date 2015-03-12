@@ -17,13 +17,19 @@ public class FigureITest {
         List<TetrisCoordinates> actualCoordinates = figure
                 .getCellsCoordinates(FigureAngle
                         .create(FigureAngle.AngleValue.ZERO));
+        assertArrayEquals(defineExpectedListOfCoordinatesForVerticalFigureI()
+                .toArray(),
+                actualCoordinates.toArray());
+    }
+
+    private List<TetrisCoordinates>
+            defineExpectedListOfCoordinatesForVerticalFigureI() {
         List<TetrisCoordinates> expectedCoordinates = new LinkedList<TetrisCoordinates>();
         expectedCoordinates.add(TetrisCoordinates.create(0, 0));
         expectedCoordinates.add(TetrisCoordinates.create(0, 1));
         expectedCoordinates.add(TetrisCoordinates.create(0, 2));
         expectedCoordinates.add(TetrisCoordinates.create(0, 3));
-        assertArrayEquals(expectedCoordinates.toArray(),
-                actualCoordinates.toArray());
+        return expectedCoordinates;
     }
 
     @Test
