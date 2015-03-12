@@ -18,8 +18,7 @@ public class FigureITest {
                 .getCellsCoordinates(FigureAngle
                         .create(FigureAngle.AngleValue.ZERO));
         assertArrayEquals(defineExpectedListOfCoordinatesForVerticalFigureI()
-                .toArray(),
-                actualCoordinates.toArray());
+                .toArray(), actualCoordinates.toArray());
     }
 
     private List<TetrisCoordinates>
