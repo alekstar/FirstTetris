@@ -49,12 +49,12 @@ public class FigureITest {
         List<TetrisCoordinates> actualCoordinates = figure
                 .getCellsCoordinates(FigureAngle
                         .create(FigureAngle.AngleValue.NINETY));
-        assertArrayEquals(getExpectedListOfCoordinatesForHorizontalFigureI()
+        assertArrayEquals(defineExpectedListOfCoordinatesForHorizontalFigureI()
                 .toArray(), actualCoordinates.toArray());
     }
 
     private List<TetrisCoordinates>
-            getExpectedListOfCoordinatesForHorizontalFigureI() {
+            defineExpectedListOfCoordinatesForHorizontalFigureI() {
         List<TetrisCoordinates> expectedCoordinates = new LinkedList<TetrisCoordinates>();
         expectedCoordinates.add(TetrisCoordinates.create(0, 0));
         expectedCoordinates.add(TetrisCoordinates.create(1, 0));
