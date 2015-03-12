@@ -53,6 +53,17 @@ public class FigureITest {
                 .toArray(), actualCoordinates.toArray());
     }
 
+    @Test
+    public void
+            shouldReturnCoordinatesOfFigureIHorizontallyForTwoHundredAndSeventyDegreesAngle() {
+        Figure figure = FigureI.create();
+        List<TetrisCoordinates> actualCoordinates = figure
+                .getCellsCoordinates(FigureAngle
+                        .create(FigureAngle.AngleValue.TWO_HUNDRED_SEVENTY));
+        assertArrayEquals(defineExpectedListOfCoordinatesForHorizontalFigureI()
+                .toArray(), actualCoordinates.toArray());
+    }
+
     private List<TetrisCoordinates>
             defineExpectedListOfCoordinatesForHorizontalFigureI() {
         List<TetrisCoordinates> expectedCoordinates = new LinkedList<TetrisCoordinates>();
