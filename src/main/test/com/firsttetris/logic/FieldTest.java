@@ -1,6 +1,8 @@
 package com.firsttetris.logic;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -56,11 +58,17 @@ public class FieldTest {
     public void shouldCreateEmptyField() {
         Field field = null;
         field = Field.create(10, 20);
-        for (int xIndex = 0; xIndex < 10; xIndex++) {
-            for (int yIndex = 0; yIndex < 20; yIndex++) {
-                assertEquals(false, field.getCellValue(xIndex, yIndex));
-            }
+        Boolean[] expectedFieldArray = defineFalseBooleanArrayFor200Elements();
+        assertArrayEquals(expectedFieldArray, field.getField().toArray());
+    }
+
+    private Boolean[] defineFalseBooleanArrayFor200Elements() {
+        final int EXPECTED_FIELD_ARRAY_SIZE = 200;
+        Boolean[] expectedFieldArray = new Boolean[EXPECTED_FIELD_ARRAY_SIZE];
+        for (int i = 0; i < expectedFieldArray.length; i++) {
+            expectedFieldArray[i] = new Boolean(false);
         }
+        return expectedFieldArray;
     }
     
     @Test

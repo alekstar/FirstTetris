@@ -55,7 +55,7 @@ public class Field {
         this.height = height;
     }
 
-    private List<Boolean> getField() {
+    List<Boolean> getField() {
         return field;
     }
 
