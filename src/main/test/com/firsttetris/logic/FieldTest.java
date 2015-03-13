@@ -58,19 +58,24 @@ public class FieldTest {
     public void shouldCreateEmptyField() {
         Field field = null;
         field = Field.create(10, 20);
-        Boolean[] expectedFieldArray = defineFalseBooleanArrayFor200Elements();
+        Boolean[] expectedFieldArray = defineFalseBooleanArrayForField(10, 20);
         assertArrayEquals(expectedFieldArray, field.getField().toArray());
     }
 
-    private Boolean[] defineFalseBooleanArrayFor200Elements() {
-        final int EXPECTED_FIELD_ARRAY_SIZE = 200;
-        Boolean[] expectedFieldArray = new Boolean[EXPECTED_FIELD_ARRAY_SIZE];
+    private Boolean[] defineFalseBooleanArrayForField(int width, int height) {
+        Boolean[] expectedFieldArray = new Boolean[width * height];
         for (int i = 0; i < expectedFieldArray.length; i++) {
             expectedFieldArray[i] = new Boolean(false);
         }
         return expectedFieldArray;
     }
     
+    private void fillCell(TetrisCoordinates coordinates, Boolean[] fieldArray,
+            int width) {
+        final int fieldArrayIndex = coordinates.getX() + coordinates.getY() * width;
+        fieldArray[fieldArrayIndex] = true;
+    }
+
     @Test
     public void shouldSetCellToTrueAtCoordinates3And4() {
         Field field = Field.create(5, 10);
@@ -80,15 +85,14 @@ public class FieldTest {
     
     @Test
     public void shouldBeTrueOnlyCellAtCoordinates3And4OtherAreClear() {
-        Field field = Field.create(5, 10);
-        field.setCellValue(3, 4, true);
-        for (int xIndex = 0; xIndex < 5; xIndex++) {
-            for (int yIndex = 0; yIndex < 10; yIndex++) {
-                if(!(xIndex == 3 && yIndex == 4)) {
-                    assertEquals(false, field.getCellValue(xIndex, yIndex));
-                }
-            }
-        }
+        final int FIELD_WIDTH = 5;
+        final int FIELD_HEIGHT = 10;
+        final int FILLED_CELL_X_COORDINATE = 3;
+        final int FILLED_CELL_Y_COORDINATE = 4;
+        Field field = Field.create(FIELD_WIDTH, FIELD_HEIGHT);
+        Boolean[] expectedFieldArray = defineFalseBooleanArrayForField(FIELD_WIDTH, FIELD_HEIGHT);
+        fillCell(TetrisCoordinates.create(FILLED_CELL_X_COORDINATE, FILLED_CELL_Y_COORDINATE), expectedFieldArray, FIELD_HEIGHT);
+        assertArrayEquals(expectedFieldArray, field.getField().toArray());
     }
 
 }
