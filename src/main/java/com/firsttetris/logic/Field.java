@@ -72,14 +72,14 @@ public class Field {
         int arrayIndex = calculateArrayIndex(xIndex, yIndex);
         return getField().get(arrayIndex).booleanValue();
     }
-    
+
     public synchronized boolean getCellValue(TetrisCoordinates coordinates) {
         checkCoordinates(coordinates);
         return getCellValue(coordinates.getX(), coordinates.getY());
     }
-    
+
     private void checkCoordinates(TetrisCoordinates coordinates) {
-        if(coordinates == null) {
+        if (coordinates == null) {
             throw new ArgumentIsNullException("coordinates");
         }
         checkXIndex(coordinates.getX());
@@ -102,14 +102,16 @@ public class Field {
         return getWidth() * yIndex + xIndex;
     }
 
-    public synchronized void setCellValue(int xIndex, int yIndex, boolean value) {
+    public synchronized void
+            setCellValue(int xIndex, int yIndex, boolean value) {
         checkXIndex(xIndex);
         checkYIndex(yIndex);
         int arrayIndex = calculateArrayIndex(xIndex, yIndex);
         getField().set(arrayIndex, value);
     }
-    
-    public synchronized void setCellValue(TetrisCoordinates coordinates, boolean value) {
+
+    public synchronized void setCellValue(TetrisCoordinates coordinates,
+            boolean value) {
         checkCoordinates(coordinates);
         setCellValue(coordinates.getX(), coordinates.getY(), value);
     }
@@ -119,4 +121,47 @@ public class Field {
             setCellValue(xIndex, yIndex, false);
         }
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((field == null) ? 0 : field.hashCode());
+        result = prime * result + height;
+        result = prime * result + width;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object anotherObject) {
+        if (this == anotherObject) {
+            return true;
+        }
+        if (anotherObject == null) {
+            return false;
+        }
+        if (getClass() != anotherObject.getClass()) {
+            return false;
+        }
+        if (hashCode() != anotherObject.hashCode()) {
+            return false;
+        }
+
+        Field anotherField = (Field) anotherObject;
+        if (getField() == null && anotherField.getField() != null) {
+            return false;
+        } else {
+            if (!getField().equals(anotherField.getField())) {
+                return false;
+            }
+            if (getHeight() != anotherField.getHeight()) {
+                return false;
+            }
+            if (getWidth() != anotherField.getWidth()) {
+                return false;
+            }
+            return true;
+        }
+    }
+
 }
